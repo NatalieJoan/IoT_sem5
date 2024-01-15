@@ -6,15 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Net.Http; 
 
-namespace Company.Function
-{
+namespace Company.Function{
 
-public static HttpResponseMessage Run(HttpRequestMessage req, ILogger log)
-{
-    var response = new HttpResponseMessage(HttpStatusCode.OK);
-    var stream = new FileStream(@"index.html", FileMode.Open);
-    response.Content = new StreamContent(stream);
-    response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
-    return response;
-}
+public static async Task<IActionResult> Run(HttpRequestMessage req, ILogger log)
+        {
+            try
+            {
+                var filePath = Path.Combine(Environment.CurrentDirectory, "index.html");
+
+                using (var stream = new FileStream(filePath, FileMode.Open))
+                {
+                    var response = new FileStreamResult(stream, "text/html");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.LogError($"Error: {ex.Message}");
+                return new StatusCodeResult(500); // Internal Server Error
+            }
+        }
 }
