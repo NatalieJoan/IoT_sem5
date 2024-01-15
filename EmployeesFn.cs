@@ -9,10 +9,11 @@ namespace Company.Function
     public class EmployeesFn
     {
         private readonly ILogger _logger;
-
-        public EmployeesFn(ILoggerFactory loggerFactory)
+        private readonly EmployeesService employeesService;
+        public EmployeesFn(ILoggerFactory loggerFactory, EmployeesService employeesService)
         {
             _logger = loggerFactory.CreateLogger<EmployeesFn>();
+            this.employeesService = employeesService;
         }
 
         [Function("EmployeesFn")]
