@@ -8,5 +8,9 @@
             },
             "enableLiveMetricsFilters": true
         }
+    },
+    "AllowedHost": "",
+    "ConnectionStrings": {
+      "EmployeesDb":"Server=tcp:cdvnhserver.database.windows.net,1433;Initial Catalog=CDV-2023;Persist Security Info=False;User ID=natalia;Password=#cdvnhserver2001;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
     }
 }
