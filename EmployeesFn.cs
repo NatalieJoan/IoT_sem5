@@ -1,6 +1,5 @@
 using System.Net;
 using System.Text.Json;
-using Azure;
 using Employees.Service;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -41,16 +40,23 @@ namespace Company.Function
                     var putRes = employeesService.Update(putEmployee.Id, putEmployee._firstName, putEmployee._lastName);
                     response.WriteAsJsonAsync(putRes);
                     break;
+                case "GET_TIME":
+                    StreamReader getTimeReader = new StreamReader(req.Body, System.Text.Encoding.UTF8);
+                    var getTimeJson = getTimeReader.ReadToEnd();
+                    var employeeId = JsonSerializer.Deserialize<Employee>(getTimeJson);
+                    var getTimeRes = employeesService.GetTime(employeeId.Id);
+    response.WriteAsJsonAsync(getTimeRes);
+                    break;
                 case "GET":
                     var employees = employeesService.Get();
                     response.WriteAsJsonAsync(employees);
                     break;
-                case "DELETE":
-                    StreamReader deleteReader = new StreamReader(req.Body, System.Text.Encoding.UTF8);
-                    var deleteJson = deleteReader.ReadToEnd();
-                    var hireEmployee = JsonSerializer.Deserialize<Employee>(deleteJson);
-                    employeesService.Delete(hireEmployee.Id);
-                    break;
+                // case "DELETE":
+                //     StreamReader deleteReader = new StreamReader(req.Body, System.Text.Encoding.UTF8);
+                //     var deleteJson = deleteReader.ReadToEnd();
+                //     var hireEmployee = JsonSerializer.Deserialize<Employee>(deleteJson);
+                //     employeesService.Delete(hireEmployee.Id);
+                //     break;
             }
 
             return response;

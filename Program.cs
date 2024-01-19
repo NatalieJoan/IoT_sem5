@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Employees.Service;
 using Database.Employee;
 using Microsoft.EntityFrameworkCore;
-using Database.Factory;
 
 var host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
