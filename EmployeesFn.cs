@@ -40,17 +40,11 @@ namespace Company.Function
                     var putRes = employeesService.Update(putEmployee.Id, putEmployee._firstName, putEmployee._lastName);
                     response.WriteAsJsonAsync(putRes);
                     break;
-                case "GET_TIME":
-                    StreamReader getTimeReader = new StreamReader(req.Body, System.Text.Encoding.UTF8);
-                    var getTimeJson = getTimeReader.ReadToEnd();
-                    var employeeId = JsonSerializer.Deserialize<Employee>(getTimeJson);
-                    var getTimeRes = employeesService.GetTime(employeeId.Id);
-    response.WriteAsJsonAsync(getTimeRes);
-                    break;
                 case "GET":
                     var employees = employeesService.Get();
                     response.WriteAsJsonAsync(employees);
                     break;
+
                 // case "DELETE":
                 //     StreamReader deleteReader = new StreamReader(req.Body, System.Text.Encoding.UTF8);
                 //     var deleteJson = deleteReader.ReadToEnd();

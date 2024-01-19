@@ -3,18 +3,28 @@ content-type: application/json
 
 {
     "_firstName": "Geralt",
-    "_lastName": "z Rivii"
+    "_lastName": "Frostborn"
 }
 
 POST http://localhost:7071/api/EmployeesFn HTTP/1.1
 content-type: application/json
 
 {
-    "_firstName": "Marzena",
-    "_lastName": "Nieznajoma"
+    "_firstName": "Torin",
+    "_lastName": "Moczybroda"
 }
 
-GET http://localhost:7071/api/EmployeesFn HTTP/1.1
+POST http://localhost:7071/api/EmployeesFn HTTP/1.1
 content-type: application/json
 
-{}
+{
+    "_firstName": "Elara",
+    "_lastName": "Ravenshadow"
+}
+
+GET http://localhost:7071/api/EmployeesFn/GetTime HTTP/1.1
+content-type: application/json
+
+{
+    "Id": 2
+}
