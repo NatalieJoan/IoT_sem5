@@ -37,7 +37,7 @@ namespace Company.Function
                     StreamReader putReader = new StreamReader(req.Body, System.Text.Encoding.UTF8);
                     var putJson = putReader.ReadToEnd();
                     var putEmployee = JsonSerializer.Deserialize<Employee>(putJson);
-                    var putRes = employeesService.Update(putEmployee.Id, putEmployee._firstName, putEmployee._lastName);
+                    var putRes = employeesService.Update(putEmployee.Id, putEmployee._firstName, putEmployee._lastName, putEmployee._timeWorking);
                     response.WriteAsJsonAsync(putRes);
                     break;
                 case "GET":

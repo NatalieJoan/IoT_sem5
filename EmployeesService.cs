@@ -2,7 +2,7 @@ namespace Employees.Service
 {
     public class EmployeesService
     {
-        private List<Employee> employees { get; } = new List<Employee>();
+        public List<Employee> employees { get; } = new List<Employee>();
 
         public Employee Add(string firstName, string lastName)
         {
@@ -10,18 +10,19 @@ namespace Employees.Service
             {
                 _firstName = firstName,
                 _lastName = lastName,
-                Id = employees.Count + 1
+                Id = employees.Count + 1,
+                _timeWorking = 0
             };
             employees.Add(employee);
             return employee;
         }
 
-       public Employee Update(int id, string firstName, string lastName)
+       public Employee Update(int id, string firstName, string lastName, int timeworking)
        {
             var employee = employees.First(w => w.Id == id);
             employee._firstName = firstName;
             employee._lastName = lastName;
-
+            employee._timeWorking = timeworking;
             return employee;
        }
         public IEnumerable<Employee> Get()
@@ -35,6 +36,8 @@ namespace Employees.Service
         public int Id { get; set; }
         public string _firstName { get; set; }
         public string _lastName { get; set; }
+
+        public int _timeWorking {get; set;}
     }
 
 }
