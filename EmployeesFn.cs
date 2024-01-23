@@ -30,18 +30,18 @@ namespace Company.Function
                     StreamReader reader = new StreamReader(req.Body, System.Text.Encoding.UTF8);
                     var json = reader.ReadToEnd();
                     var employee = JsonSerializer.Deserialize<Employee>(json);
-                    var res = employeesService.Add(employee._firstName, employee._lastName);
+                    var res = employeesService.AddEmployee(employee._firstName, employee._lastName);
                     response.WriteAsJsonAsync(res);
                     break;
                 case "PUT":
                     StreamReader putReader = new StreamReader(req.Body, System.Text.Encoding.UTF8);
                     var putJson = putReader.ReadToEnd();
                     var putEmployee = JsonSerializer.Deserialize<Employee>(putJson);
-                    var putRes = employeesService.Update(putEmployee.Id, putEmployee._firstName, putEmployee._lastName, putEmployee._timeWorking);
+                    var putRes = employeesService.UpdateEmployee(putEmployee.Id, putEmployee._firstName, putEmployee._lastName, putEmployee._timeWorking);
                     response.WriteAsJsonAsync(putRes);
                     break;
                 case "GET":
-                    var employees = employeesService.Get();
+                    var employees = employeesService.GetEmployee();
                     response.WriteAsJsonAsync(employees);
                     break;
 

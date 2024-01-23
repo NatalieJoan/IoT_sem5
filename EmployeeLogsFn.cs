@@ -1,20 +1,24 @@
 using System.Net;
 using System.Text.Json;
-using EmployeeLogs.Service;
+using Employees.Service;
 using Database.Entities.EmployeeLogs;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Google.Protobuf.WellKnownTypes;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.IO;
 
 namespace Company.Function
 {
     public class EmployeeLogsFn
     {
-        private readonly ILogger _logger;
-        private readonly EmployeeLogsService employeeLogsService = new EmployeeLogsService(null);
         
-        public EmployeeLogsFn(ILoggerFactory loggerFactory, EmployeeLogsService employeeLogsService)
+        private readonly ILogger _logger;
+        private readonly EmployeesService employeeLogsService = new EmployeesService();
+        
+        public EmployeeLogsFn(ILoggerFactory loggerFactory, EmployeesService employeeLogsService)
         {
             _logger = loggerFactory.CreateLogger<EmployeeLogsFn>();
             this.employeeLogsService = employeeLogsService;
@@ -24,7 +28,6 @@ namespace Company.Function
         public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "post", "get")] HttpRequestData req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
-
             var response = req.CreateResponse(HttpStatusCode.OK);
             switch (req.Method)
 
@@ -37,7 +40,7 @@ namespace Company.Function
                     response.WriteAsJsonAsync(res);
                     break;
                 case "GET":
-                    var logs = employeeLogsService.Get();
+                    var logs = employeeLogsService.GetTimeLog();
                     response.WriteAsJsonAsync(logs);
                     break;
             }
