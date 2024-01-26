@@ -6,7 +6,7 @@ content-type: application/json
     "_lastName": "z Rivii"
 }
 
-POST http://localhost:7071/api/EmployeesFn HTTP/1.1
+POST https://project-nhelak.azurewebsites.net/api/EmployeesFn?code=sXfiegFvXyDT_iBEedP_RqP-IZWpJ-iCnUlMjfno9YhjAzFuaJvkwA== HTTP/1.1
 content-type: application/json
 
 {
@@ -14,7 +14,20 @@ content-type: application/json
     "_lastName": "Moczybroda"
 }
 
+POST http://localhost:7071/api/EmployeesFn HTTP/1.1
+content-type: application/json
+
+{
+    "_firstName": "Jozefina",
+    "_lastName": "Plotka"
+}
+
 GET http://localhost:7071/api/EmployeesFn HTTP/1.1
+content-type: application/json
+
+{}
+
+GET http://localhost:7071/api/EmployeeLogsFn HTTP/1.1
 content-type: application/json
 
 {}
@@ -23,10 +36,5 @@ POST http://localhost:7071/api/EmployeeLogsFn HTTP/1.1
 content-type: application/json
 
 {
-    "EmployeeId": 1
+    "EmployeeId": 2
 }
-
-GET http://localhost:7071/api/EmployeesFn HTTP/1.1
-content-type: application/json
-
-{}
